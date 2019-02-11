@@ -189,6 +189,7 @@ function solve() {
 
 function newPuzzle() {
     reset();
+    // console.log("reset");
 
     let numList = [];
 
@@ -206,17 +207,32 @@ function newPuzzle() {
         numList.push(0);
     }
 
+    // console.log("numlist ready");
+
     Cells().forEach((c, index) => {
         c.value(numList[index]);
         c.type('number');
         c.given(index < 5);
     });
 
+    // console.log("numlist applied to cells");
+
+    //remove below
+    let numString = "";
+    numList.forEach(i => numString += i);
+    console.log(numString);
+    //remove above
+
     solve();
+
+
+    // console.log("solved");
 
     for (let i = 0; i < 5; i++) {
         Cells()[i].given(false);
     }
+
+    // console.log("previous givens removed");
 
     let given = Math.floor(Math.random() * 26) + 22;
     for (let i = 0; i < given; i++) {
@@ -230,13 +246,15 @@ function newPuzzle() {
         Cells()[index].type('button');
     }
 
+    // console.log("new givens applied");
+
     Cells().forEach(c => {
         if (!c.given()) {
             c.value(0);
         }
     });
 
-    console.log("done");
+    // console.log("new puzle complete");
 }
 
 $(document).ready(function () {
