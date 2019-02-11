@@ -120,7 +120,7 @@ function checkCell(cell) {
             cell.indicator('btn-success');
         }
     } else {
-        cell.indicator('btn-warning');
+        cell.indicator('btn-default');
     }
 }
 
@@ -187,6 +187,57 @@ function solve() {
     }
 }
 
-$(document).ready(function () {
+function newPuzzle() {
+    reset();
 
+    let numList = [];
+
+    for (let i = 0; i < 5; i++) {
+        let rndNum = Math.floor(Math.random() * 9) + 1;
+        for (let j = 0; j < i; j++) {
+            if (rndNum == numList[j]) {
+                rndNum = Math.floor(Math.random() * 9) + 1;
+                j = 0;
+            }
+        }
+        numList.push(rndNum);
+    }
+    for (let i = 5; i < 81; i++) {
+        numList.push(0);
+    }
+
+    Cells().forEach((c, index) => {
+        c.value(numList[index]);
+        c.type('number');
+        c.given(index < 5);
+    });
+
+    solve();
+
+    for (let i = 0; i < 5; i++) {
+        Cells()[i].given(false);
+    }
+
+    let given = Math.floor(Math.random() * 26) + 22;
+    for (let i = 0; i < given; i++) {
+
+        let index;
+        do {
+            index = Math.floor(Math.random() * 81);
+        } while (Cells()[index].given() != false);
+
+        Cells()[index].given(true);
+        Cells()[index].type('button');
+    }
+
+    Cells().forEach(c => {
+        if (!c.given()) {
+            c.value(0);
+        }
+    });
+
+    console.log("done");
+}
+
+$(document).ready(function () {
 });
