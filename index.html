@@ -20,9 +20,9 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-form navbar-right btn-group">
-                <button class="btn btn-primary" onclick="newPuzzle()">New</button>
-                <button class="btn btn-primary" onclick="reset()">Reset</button>
-                <button class="btn btn-primary" onclick="solve()">Solve</button>
+                <button id="newBtn" class="btn btn-primary" onclick="newPuzzle()">New</button>
+                <button id="resetBtn" class="btn btn-primary" onclick="reset()">Reset</button>
+                <button id="solveBtn" class="btn btn-primary" onclick="solve()">Solve</button>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
@@ -177,8 +177,9 @@
                         Simple Sudoku
                     </div>
                     <div class="panel-body">
-                        Simple sudoku game using Knockout and jQuery.<hr/>
-                        WORK IN PROGRESS | Will break if 'New' option is spammed.
+                        Simple sudoku game using Knockout and jQuery.
+                        <hr />
+                        WORK IN PROGRESS | <s>Will break if 'New' option is spammed.</s> FIXED!!
                     </div>
                 </div>
                 <div class="panel panel-default row">
@@ -191,8 +192,6 @@
                         <button class="btn btn-success">Valid number</button>
                         <hr />
                         <button class="btn btn-danger">Invalid number</button>
-                        <hr />
-                        <button class="btn btn-warning">Invalid input</button>
                     </div>
                 </div>
             </div>

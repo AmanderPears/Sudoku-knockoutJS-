@@ -126,136 +126,155 @@ function checkCell(cell) {
 
 //reset() 
 function reset() {
+    let rBTN = $('#resetBtn');
+    rBTN.prop('disabled', true);
+
     Cells().forEach(c => {
         if (!c.given()) {
             c.value(0);
         }
     });
+
+    rBTN.prop('disabled', false);
 }
 
-//solve the puzzle
 function solve() {
+    let sBTN = $('#solveBtn');
+    sBTN.prop('disabled', true);
+
     reset();
 
-    let cellArray = ko.mapping.toJS(Cells);
+    let numList = [];
 
-    //true or false variable used to advance or backtrack
+    Cells().forEach(c => {
+        numList.push({
+            value: c.value(),
+            given: c.given(),
+            neighbours: c.neighbours
+        });
+    });
+
     let error = false;
-
-    //start at 0, go upto x, if there is an error go back otherwise move forward
-    for (let i = 0; i <= 80; i = error ? ((i - 1) >= 0 ? i - 1 : 0) : i + 1) {
-        //display current index (current cell being solved)
-
-        //do calculations only if the cell is not a given value
-        if (!cellArray[i].given) {
-
-            //do something "while" the condition is true 
+    for (let i = 0; i < 81; i = error ? ((i - 1) >= 0 ? i - 1 : 0) : i + 1) {
+        if (!numList[i].given) {
             do {
-                //increment by 1
-                cellArray[i].value++;
+                numList[i].value++;
 
-                //check row,column,box for value if it is unique
-                //if the value is valid break out of the loop
-                //if it is no valid, go to the start of the looop
-
-                if (!cellArray[i].neighbours.some(index => {
-                    if (cellArray[index].value != 0) {
-                        return cellArray[index].value == cellArray[i].value;
+                if (!numList[i].neighbours.some(index => {
+                    if (numList[index].value != 0) {
+                        return numList[index].value == numList[i].value;
                     }
                 })) {
                     break;
                 }
 
-            } while (cellArray[i].value <= 9);
+            } while (numList[i].value <= 9);
 
             //if it was invalid
-            if (cellArray[i].value > 9) {
+            if (numList[i].value > 9) {
                 //set error true
                 error = true;
                 //reset value
-                cellArray[i].value = 0;
+                numList[i].value = 0;
             } else {
                 error = false;
             }
         }
     }
 
-    for (let i = 0; i < 81; i++) {
-        if (!Cells()[i].given()) {
-            Cells()[i].value(cellArray[i].value);
-        }
-    }
+    Cells().forEach((c, index) => {
+        c.value(numList[index].value);
+    });
+
+    sBTN.prop('disabled', false);
 }
 
 function newPuzzle() {
-    reset();
-    // console.log("reset");
+
+    let npBTN = $('#newBtn');
+    npBTN.prop('disabled', true);
 
     let numList = [];
 
-    for (let i = 0; i < 5; i++) {
-        let rndNum = Math.floor(Math.random() * 9) + 1;
-        for (let j = 0; j < i; j++) {
-            if (rndNum == numList[j]) {
-                rndNum = Math.floor(Math.random() * 9) + 1;
-                j = 0;
-            }
-        }
-        numList.push(rndNum);
-    }
-    for (let i = 5; i < 81; i++) {
-        numList.push(0);
-    }
-
-    // console.log("numlist ready");
-
-    Cells().forEach((c, index) => {
-        c.value(numList[index]);
-        c.type('number');
-        c.given(index < 5);
+    Cells().forEach(c => {
+        numList.push({
+            value: c.value(),
+            given: c.given(),
+            neighbours: c.neighbours
+        });
     });
 
-    // console.log("numlist applied to cells");
-
-    //remove below
-    let numString = "";
-    numList.forEach(i => numString += i);
-    console.log(numString);
-    //remove above
-
-    solve();
-
-
-    // console.log("solved");
-
     for (let i = 0; i < 5; i++) {
-        Cells()[i].given(false);
+        let rndNum = Math.floor(Math.random() * 9) + 1;
+        for (let j = 0; j <= i; j++) {
+            if (rndNum === numList[j].value) {
+                rndNum = Math.floor(Math.random() * 9) + 1;
+                j = -1;
+            }
+        }
+        numList[i].value = rndNum;
+        numList[i].given = true;
     }
 
-    // console.log("previous givens removed");
+    for (let i = 5; i < 81; i++) {
+        numList[i].value = 0;
+        numList[i].given = false;
+    }
 
-    let given = Math.floor(Math.random() * 26) + 22;
+    let error = false;
+    for (let i = 0; i < 81; i = error ? ((i - 1) >= 0 ? i - 1 : 0) : i + 1) {
+        if (!numList[i].given) {
+            do {
+                numList[i].value++;
+
+                if (!numList[i].neighbours.some(index => {
+                    if (numList[index].value != 0) {
+                        return numList[index].value == numList[i].value;
+                    }
+                })) {
+                    break;
+                }
+
+            } while (numList[i].value <= 9);
+
+            //if it was invalid
+            if (numList[i].value > 9) {
+                //set error true
+                error = true;
+                //reset value
+                numList[i].value = 0;
+            } else {
+                error = false;
+            }
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        numList[i].given = false;
+    }
+
+    let given = Math.floor(Math.random() * (26 - 22)) + 22;
     for (let i = 0; i < given; i++) {
 
         let index;
         do {
             index = Math.floor(Math.random() * 81);
-        } while (Cells()[index].given() != false);
+        } while (numList[index].given != false);
 
-        Cells()[index].given(true);
-        Cells()[index].type('button');
+        numList[index].given = true;
     }
 
-    // console.log("new givens applied");
-
-    Cells().forEach(c => {
-        if (!c.given()) {
-            c.value(0);
+    numList.forEach((nl, index) => {
+        if (nl.given) {
+            Cells()[index].value(nl.value);
+            Cells()[index].given(nl.given);
+            Cells()[index].type('button');
+        } else {
+            Cells()[index].value(0);
+            Cells()[index].given(false);
+            Cells()[index].type('number');
         }
     });
 
-    // console.log("new puzle complete");
+    npBTN.prop('disabled', false);
 }
-
-$(document).ready(function () {
-});
