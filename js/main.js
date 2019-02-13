@@ -109,7 +109,7 @@ ko.applyBindings(Cells);
 
 //check a cell using 'Cells'
 function checkCell(cell) {
-    if (cell.value() >= 1 && cell.value() <= 9) {
+    if ((cell.value() >= 1 && cell.value() <= 9)) {
         if (cell.neighbours.some(index => {
             if (Cells()[index].value() != 0) {
                 return Cells()[index].value() == cell.value();
@@ -198,8 +198,8 @@ function newPuzzle() {
 
     Cells().forEach(c => {
         numList.push({
-            value: c.value(),
-            given: c.given(),
+            value: 0,
+            given: false,
             neighbours: c.neighbours
         });
     });
@@ -214,11 +214,6 @@ function newPuzzle() {
         }
         numList[i].value = rndNum;
         numList[i].given = true;
-    }
-
-    for (let i = 5; i < 81; i++) {
-        numList[i].value = 0;
-        numList[i].given = false;
     }
 
     let error = false;
@@ -278,3 +273,7 @@ function newPuzzle() {
 
     npBTN.prop('disabled', false);
 }
+
+// $(document).ready(function () {
+
+// });

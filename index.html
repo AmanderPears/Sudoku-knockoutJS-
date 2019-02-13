@@ -14,168 +14,164 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Amander Pears</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse my-2 my-lg-0 d-flex justify-content-end" id="navbarSupportedContent">
-            <div class="form-inline my-2 my-lg-0 btn-group">
+    <nav class="sticky-top navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-light bg-light">
+            <div class="form-inline btn-group">
                 <button id="newBtn" class="btn btn-outline-secondary" onclick="newPuzzle()">New</button>
                 <button id="resetBtn" class="btn btn-outline-secondary" onclick="reset()">Reset</button>
                 <button id="solveBtn" class="btn btn-outline-secondary" onclick="solve()">Solve</button>
             </div>
-        </div>
+        </nav>
     </nav>
 
     <div class="container">
         <div class="row">
-            <div class="container col-8">
-                <div id="table">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==1 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
 
-                                <td class="v-divider" rowspan="5"></td>
+            <div id="table" class="col-12 col-lg-8 col-xl-7">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==1 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==2 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
+                            <td class="v-divider" rowspan="5"></td>
 
-                                <td class="v-divider" rowspan="5"></td>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==2 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==3 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
-                            </tr>
+                            <td class="v-divider" rowspan="5"></td>
 
-                            <tr>
-                                <td class="h-divider" colspan="5"></td>
-                            </tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==3 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==4 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
+                        <tr>
+                            <td class="h-divider" colspan="5"></td>
+                        </tr>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==5 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
+                        <tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==4 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==6 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
-                            </tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==5 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
 
-                            <tr>
-                                <td class="h-divider" colspan="5"></td>
-                            </tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==6 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==7 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
+                        <tr>
+                            <td class="h-divider" colspan="5"></td>
+                        </tr>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==8 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
+                        <tr>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==7 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
 
-                                <td>
-                                    <div class="grid" data-bind="foreach:Cells">
-                                        <!-- ko if: grd==9 -->
-                                        <input class="btn" min="0" max="9"
-                                            data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
-                                        <!-- ko if: (index+1)%3==0-->
-                                        <br />
-                                        <!-- /ko -->
-                                        <!-- /ko -->
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==8 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="grid" data-bind="foreach:Cells">
+                                    <!-- ko if: grd==9 -->
+                                    <input class="btn" min="0" max="9"
+                                        data-bind="attr: {type:type, disabled:given}, textInput: value, css:indicator" />
+                                    <!-- ko if: (index+1)%3==0-->
+                                    <br />
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="jumbotron jumbotron-fluid col-4">
+
+
+
+            <div class="jumbotron col-12 col-lg-4 col-xl-5">
                 <div class="container">
                     <h1 class="display-3">Simple Sudoku</h1>
                     <p class="lead">
                         Simple sudoku game using Knockout and jQuery.</p>
                 </div>
             </div>
+
         </div>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -192,6 +188,8 @@
     <script src="js/knockout.mapping-latest.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="main.css">
+    <link rel='stylesheet' media='screen and (min-width: 0px) and (max-width: 769px)' href='css/sm.css' />
+    <link rel='stylesheet' media='screen and (min-width: 768px)' href='css/lg.css' />
 </body>
 
 </html>

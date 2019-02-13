@@ -1,21 +1,18 @@
-.center {
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
+table {
+    min-width: 550px;
 }
 
 div#table input {
     font-size: large !important;
     width: 60px !important;
     height: 60px !important;
-    margin: 2px !important;
+    
+    margin: 1px -1px 1px -1px !important;
     padding: 2px !important;
+
 }
 div#table input[type=button] {
-    width: 60px !important;
-    height: 60px !important;
-    margin: 2px !important;
-    padding: 2px !important;
+    
     font-weight: bold !important;
     color: black !important;
     background-color: gray !important;
@@ -23,18 +20,15 @@ div#table input[type=button] {
 
 
 div#table .v-divider {
-    margin: 1px !important;
-    width: 2px !important;
+    width: 1px !important;
     background-color: gray;
 }
 
 div#table .h-divider {
-    margin: 1px !important;
-    height: 2px !important;
+    height: 1px !important;
     background-color: gray;
 }
 
 div#table .grid {
-    padding: 2px !important;
-    margin: 2px !important;
+    padding: 1px !important;
 }

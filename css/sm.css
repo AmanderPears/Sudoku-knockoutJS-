@@ -1,0 +1,34 @@
+table {
+    min-width: 400px;
+}
+
+div#table input {
+    font-size: large !important;
+    width: 38px !important;
+    height: 38px !important;
+    
+    margin: 1px -1px 1px -1px !important;
+    padding: 2px !important;
+
+}
+div#table input[type=button] {
+    
+    font-weight: bold !important;
+    color: black !important;
+    background-color: gray !important;
+}
+
+
+div#table .v-divider {
+    width: 1px !important;
+    background-color: gray;
+}
+
+div#table .h-divider {
+    height: 1px !important;
+    background-color: gray;
+}
+
+div#table .grid {
+    padding: 1px !important;
+}
