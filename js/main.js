@@ -1,12 +1,5 @@
 ko.options.deferUpdates = true;
 
-//variables
-
-// let puzzle = "1........753..86...6..23.5...4..528.8..3.....5.67...3.......1.....1.6...4..8.....";
-// let puzzle = ".9.64.......9....5..4......2...7......5.39....49..2.6887......9...3..2.6....9.7..";
-// let puzzle = "1..3...8.9.5.......6....7.....9..346......8.......59....4....7.516.3....8.3...69.";
-// let puzzle = ".................2.49......5....64....42916....784...16.....98......8.5.9.5..2..6";
-// let puzzle = "9.1.6.5.....3.2...34......8.3.4.........3..6.42...8.....58.91...........6...15...";
 let puzzle = "3......69..8.94......37.1...39...7.16.1.....4.4....8..5.7.3....1..7.........8....";
 
 //row index
@@ -83,7 +76,7 @@ class SudokuCell extends Cell {
         this.col = col[index];
         this.grd = grd[index];
         this.neighbours = neighbours(index);
-        this.indicator = ko.observable('btn-default').extend({ rateLimit: 50 });
+        this.indicator = ko.observable((this.given() ? 'btn-secondary' : 'btn-light')).extend({ rateLimit: 50 });
 
         this.value.subscribe(() => {
             checkCell(this);
@@ -105,11 +98,9 @@ class SudokuCell extends Cell {
 let Cells = ko.observableArray().extend({ rateLimit: 50 });
 for (let i = 0; i < puzzle.length; i++) {
     if (puzzle.charAt(i) !== '.') {
-        //        Cells[i] = new SudokuCell(parseInt(puzzle.charAt(i)), true, 'button', i);
         Cells.push(new SudokuCell(parseInt(puzzle.charAt(i)), true, 'button', i));
     } else {
-        //Cells[i] = new SudokuCell(0, false, 'number', i);
-        Cells.push(new SudokuCell(0, false, 'number', i));
+        Cells.push(new SudokuCell(0, false, 'button', i));
     }
 }
 
@@ -129,7 +120,7 @@ function checkCell(cell) {
             cell.indicator('btn-success');
         }
     } else {
-        cell.indicator('btn-default');
+        cell.indicator('btn-secondary');
     }
 }
 

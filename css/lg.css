@@ -11,12 +11,6 @@ div#table input {
     padding: 2px !important;
 
 }
-div#table input[type=button] {
-    
-    font-weight: bold !important;
-    color: black !important;
-    background-color: gray !important;
-}
 
 
 div#table .v-divider {
