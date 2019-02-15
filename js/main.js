@@ -88,6 +88,15 @@ class SudokuCell extends Cell {
         this.value.subscribe(() => {
             checkCell(this);
         });
+
+
+        this.activateNumpad = function (first, event) {
+            numpad.top(event.pageY + 'px');
+            numpad.left(event.pageX + 'px');
+            numpad.visible(true);
+            numpad.currentParent = first.index;
+            //console.log(first.index);
+        };
     }
 }
 
@@ -104,7 +113,7 @@ for (let i = 0; i < puzzle.length; i++) {
     }
 }
 
-ko.applyBindings(Cells);
+ko.applyBindings(Cells, $('#table')[0]);
 
 
 //check a cell using 'Cells'
@@ -274,6 +283,24 @@ function newPuzzle() {
     npBTN.prop('disabled', false);
 }
 
-// $(document).ready(function () {
+var numpad = {
+    visible: ko.observable(false),
+    position: 'fixed',
+    left: ko.observable('0px'),
+    top: ko.observable('0px'),
+    currentParent: null,
+    numkeyClick: function (event) {
+        //console.log(this.currentParent);
+        Cells()[this.currentParent].value(parseInt(event));
+        //console.log(event);
 
-// });
+        this.visible(false);
+        this.top('-100px');
+        this.left('-100px');
+    }
+}
+ko.applyBindings(numpad, $('#numpad')[0]);
+
+$(document).ready(function () {
+
+});

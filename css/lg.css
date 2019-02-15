@@ -32,3 +32,8 @@ div#table .h-divider {
 div#table .grid {
     padding: 1px !important;
 }
+
+.numkey {
+    width: 60px !important;
+    height: 60px !important;
+}
