@@ -61,15 +61,16 @@ function neighbours(index) {
 
 //individual cell
 class Cell {
-    constructor(value, given) {
+    constructor(value, given, type) {
         this.value = ko.observable(value).extend({ rateLimit: 50 });
         this.given = ko.observable(given).extend({ rateLimit: 50 });
+        this.type = ko.observable(type).extend({ rateLimit: 50 });
     }
 }
 
 class SudokuCell extends Cell {
-    constructor(value, given, index) {
-        super(value, given);
+    constructor(value, given, type, index) {
+        super(value, given, type);
         this.index = index;
         this.row = row[index];
         this.col = col[index];
@@ -97,9 +98,9 @@ class SudokuCell extends Cell {
 let Cells = ko.observableArray().extend({ rateLimit: 50 });
 for (let i = 0; i < puzzle.length; i++) {
     if (puzzle.charAt(i) !== '.') {
-        Cells.push(new SudokuCell(parseInt(puzzle.charAt(i)), true, i));
+        Cells.push(new SudokuCell(parseInt(puzzle.charAt(i)), true, 'button', i));
     } else {
-        Cells.push(new SudokuCell(0, false, i));
+        Cells.push(new SudokuCell(0, false, 'button', i));
     }
 }
 
@@ -108,20 +109,18 @@ ko.applyBindings(Cells, $('#table')[0]);
 
 //check a cell using 'Cells'
 function checkCell(cell) {
-    if (!cell.given()) {
-        if (cell.value() == 0) {
-            cell.indicator('btn-light');
-        } else {
-            if (cell.neighbours.some(index => {
-                if (Cells()[index].value() != 0) {
-                    return Cells()[index].value() == cell.value();
-                }
-            })) {
-                cell.indicator('btn-danger');
-            } else {
-                cell.indicator('btn-success');
+    if ((cell.value() >= 1 && cell.value() <= 9)) {
+        if (cell.neighbours.some(index => {
+            if (Cells()[index].value() != 0) {
+                return Cells()[index].value() == cell.value();
             }
+        })) {
+            cell.indicator('btn-danger');
+        } else {
+            cell.indicator('btn-success');
         }
+    } else {
+       // cell.indicator('btn-light');
     }
 }
 
@@ -264,10 +263,12 @@ function newPuzzle() {
         if (nl.given) {
             Cells()[index].value(nl.value);
             Cells()[index].given(nl.given);
+            Cells()[index].type('button');
             Cells()[index].indicator('btn-secondary');
         } else {
             Cells()[index].value(0);
             Cells()[index].given(false);
+            Cells()[index].type('button');
             Cells()[index].indicator('btn-light');
         }
     });
